@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>94ACE0EC-225D-4672-B219-0786F821BE3F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ColorBall</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6E1B9275-17CD-4428-96E9-07C842C3F96B</key>
+		<string>https://github.com/backjy/ColorBall.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>proj.ios/ColorBall.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6E1B9275-17CD-4428-96E9-07C842C3F96B</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/backjy/ColorBall.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6E1B9275-17CD-4428-96E9-07C842C3F96B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6E1B9275-17CD-4428-96E9-07C842C3F96B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ColorBall</string>
+		</dict>
+	</array>
+</dict>
+</plist>

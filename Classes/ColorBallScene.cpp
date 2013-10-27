@@ -65,17 +65,52 @@ void ColorBallScene::onEnter(void)
     ColorBallTouchLayer * touchLayer = ColorBallTouchLayer::create();
     touchLayer->setCtrol(this);
     addChild(touchLayer);
+
+    Size wS = Director::getInstance()->getWinSize();
+    Point midPos = Point(wS.width/2, wS.height/2);
+
+    String * levelStr = String::createWithFormat("第 %d 关",m_iLevel);
+
+    LabelTTF * levelGuid = LabelTTF::create(levelStr->getCString(), "迷你简卡通", 50);
+    levelGuid->setPosition(Point(midPos.x * 2.1, midPos.y));
+    addChild(levelGuid);
+    levelGuid->setColor(Color3B(0,0,0));
+
+    MoveTo * moveTo1 = MoveTo::create(0.3, Point(midPos.x - 50,midPos.y));
+    MoveTo * moveTo2 = MoveTo::create(0.1, Point(midPos));
+    EaseBackInOut * ease = EaseBackInOut::create(Sequence::create(moveTo1, moveTo2, NULL));
+    CallFunc * callShowAll = CallFunc::create(CC_CALLBACK_0(ColorBallScene::callFuncShowAllBalls,this));
+    CallFunc * callGuidEnd = CallFunc::create(CC_CALLBACK_0(ColorBallScene::callFuncGuidEnd,this));
+
+    ScaleTo * scaleTo = ScaleTo::create(0.3, 6);
+    FadeOut * fadeOut = FadeOut::create(0.3);
+    Spawn * spawn = Spawn::create(scaleTo, fadeOut, NULL);
+    RemoveSelf * removeSelf = RemoveSelf::create();
+    levelGuid->runAction(Sequence::create(ease, callShowAll, DelayTime::create(0.3),spawn, callGuidEnd, removeSelf, NULL));
 }
 
 void ColorBallScene::onEnterTransitionDidFinish(void)
 {
     Layer::onEnterTransitionDidFinish();
+}
+
+void ColorBallScene::callFuncShowAllBalls()
+{
+
     Object * obj = NULL;
+    int i=0;
     CCARRAY_FOREACH(m_pAryAllBalls, obj)
     {
         ColorBall * ball = (ColorBall*)obj;
-        ball->tintToDeepGreey();
+
+        ball->fadeIn(i/m_iCells);
+        i++;
     }
+}
+
+void ColorBallScene::callFuncGuidEnd()
+{
+    log("guid end");
 }
 
 void ColorBallScene::onExit(void)
@@ -96,7 +131,7 @@ void ColorBallScene::initFindBalls(int level)//初始化要找那些球球
         m_eFindBalls.clear();
     }
     
-    for (int i=0; i<level + 3; i++)
+    for (int i=0; i<level + 1; i++)
     {
         
         int randType = (arc4random() % 4) + 1;
@@ -109,7 +144,9 @@ void ColorBallScene::initFindBalls(int level)//初始化要找那些球球
 void ColorBallScene::initSpriteBalls()
 {
     int cells       = m_iLevel / 4 + 3;// 关卡一共有多少个球按照 3 的倍数来初始化矩阵
-    
+
+    m_iCells = cells;
+
     float base      = 640.0f/cells;
 
     m_fRadius = base/2;
@@ -128,12 +165,10 @@ void ColorBallScene::initSpriteBalls()
             
             ColorBall * ball = ColorBall::create();
             ball->setPosition(Point(leftTop.x + x * base, leftTop.y - y * base));
-//            printf("(%.2f,%.2f)",Point(leftTop.x + x * base, leftTop.y - y * base).x,Point(leftTop.x + x * base, leftTop.y - y * base).y);
             addChild(ball);
             
             m_pAryAllBalls->addObject(ball);
         }
-//        printf("\n");
     }
 }
 
@@ -164,7 +199,6 @@ void ColorBallScene::initFindBallsPosition()
 
 bool ColorBallScene::touchBegin(Point &pos)
 {
-//    CCLOG("----:(%f,%f)",pos.x,pos.y);
     m_pCurSelect = getBallOnTouchPosition(pos);
     if (m_pCurSelect)
     {

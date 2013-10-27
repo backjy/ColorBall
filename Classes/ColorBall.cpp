@@ -68,6 +68,8 @@ bool ColorBall::init()
     m_pSprite = Sprite::createWithSpriteFrame(spriteFrameByType(m_eType));
     m_pSprite->setScale(0.6);// 图片太大了 要缩小 
     addChild(m_pSprite);
+
+    m_pSprite->setVisible(false);
     
     return true;
 }
@@ -110,6 +112,17 @@ void ColorBall::tintToDeepGreey()
     {
         m_pSprite->setDisplayFrame(spriteFrameByType(color_deepGray));
     }
+}
+
+void ColorBall::fadeIn(int wait)
+{
+    DelayTime * delay = DelayTime::create(wait*0.1);
+    m_pSprite->setVisible(true);
+    m_pSprite->setScale(0.1);
+    ScaleTo * scale1 = ScaleTo::create(0.3, 0.9);
+    ScaleTo * scale2 = ScaleTo::create(0.3, 0.6);
+    ActionInterval * seq = EaseSineInOut::create(Sequence::create(scale1, scale2, NULL));
+    m_pSprite->runAction(Sequence::create(delay, seq, NULL));
 }
 
 

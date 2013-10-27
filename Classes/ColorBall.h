@@ -39,6 +39,8 @@ public:
     
     void selected();
     void unselected();
+
+    void fadeIn(int wait);
     
     BallTypes getType()
     {

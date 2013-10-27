@@ -23,6 +23,7 @@ class ColorBallScene :public Layer
 {
     float               m_fRadius;
     int                 m_iLevel;
+    int                 m_iCells;
     vector<BallTypes>   m_eFindBalls;
     Array              *m_pAryAllBalls;
     ColorBall          *m_pCurSelect;
@@ -51,6 +52,9 @@ private:
     void update(float delta);
 
     ColorBall * getBallOnTouchPosition(Point &pos);
+
+    void callFuncGuidEnd();
+    void callFuncShowAllBalls();
 };
 
 #endif

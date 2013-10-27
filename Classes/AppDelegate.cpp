@@ -1,6 +1,6 @@
 #include "AppDelegate.h"
 
-#include "ColorBallScene.h"
+#include "MainScene.h"
 
 USING_NS_CC;
 
@@ -26,7 +26,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 
     // create a scene. it's an autorelease object
-    Scene *scene = ColorBallScene::create(9);
+    Scene *scene = MainScene::getMainScene();
 
     // run
     director->runWithScene(scene);
